@@ -27,17 +27,13 @@ public class Telephone {
 
 
     public void answerCalls() {
-        if (calls.size() > 0) {
-            for (int i = 0; i < calls.size(); i++) {
-                try {
-                    Thread.sleep(TIME_CALL_PROCESSING);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
-                System.out.println("Звонок обработан: " + calls.poll());
+        while (!calls.isEmpty()) {
+            try {
+                Thread.sleep(TIME_CALL_PROCESSING);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
             }
-        } else {
-            System.out.println("Специалист: жду следующего звонка");
+            System.out.println("Звонок обработан: " + calls.poll());
         }
     }
 
