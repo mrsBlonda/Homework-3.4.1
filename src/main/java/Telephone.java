@@ -28,12 +28,18 @@ public class Telephone {
 
     public void answerCalls() {
         while (!calls.isEmpty()) {
-            try {
-                Thread.sleep(TIME_CALL_PROCESSING);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
+            String call = calls.poll();
+            if (!(call == null)) {
+                try {
+                    Thread.sleep(TIME_CALL_PROCESSING);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+                System.out.println("Звонок обработан: " + call);
+            } else {
+                System.out.println("Жду следующего звонка");
             }
-            System.out.println("Звонок обработан: " + calls.poll());
+
         }
     }
 
